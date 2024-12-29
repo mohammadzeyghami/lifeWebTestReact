@@ -8,6 +8,12 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["jest", "@testing-library/jest-dom", "node"],
+    "jsx": "react-jsx",
+    "module": "ESNext", // Ensure compatibility with modern module systems
+    "target": "ES6", // Set the target to a suitable ECMAScript version
+    "esModuleInterop": true, // Ensure compatibility with CommonJS modules
+    "allowSyntheticDefaultImports": true // Allow default imports for React
   }
 }

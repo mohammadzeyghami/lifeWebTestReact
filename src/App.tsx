@@ -2,10 +2,12 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { IntlProvider } from "react-intl";
 import HomePage from "./modules/home/pages/Home";
 import enMessages from "./locales/en.json";
-import { TooltipProvider } from "./components/ui/tooltip";
+import { TooltipProvider } from "./components/atoms/tooltip/tooltip";
 import { useState, useEffect } from "react";
 import faMessages from "./locales/faMessages.json";
 import { ThemeProvider } from "./components/molecules/providers/ThemeProvider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
 
 type Messages = {
   [locale: string]: {
@@ -38,6 +40,15 @@ const App = () => {
   const [locale, setLocale] = useState(
     navigator.language.startsWith("fa") ? "fa" : "en-US"
   );
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchInterval: 1000 * 60 * 3, // 3 minutes in milliseconds
+        refetchOnWindowFocus: false, // Optional: Prevent refetch on window focus
+        staleTime: 1000 * 60 * 3, // Optional: Mark data as fresh for 3 minutes
+      },
+    },
+  });
 
   // Effect to change the dir attribute based on locale
   useEffect(() => {
@@ -47,19 +58,26 @@ const App = () => {
   return (
     <IntlProvider locale={locale} messages={messages[locale]}>
       <ThemeProvider>
-        <TooltipProvider>
-          <BrowserRouter>
-            <LocaleProvider setLocale={setLocale} />{" "}
-            {/* Add LocaleProvider here */}
-            <div>
-              <Routes>
-                <Route path="/:lang/home" element={<HomePage />} />
-                {/* <Route path="/about" element={<About />} /> */}
-                <Route path="*" element={<div>404 Not Found</div>} />
-              </Routes>
-            </div>
-          </BrowserRouter>
-        </TooltipProvider>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+            />
+            <BrowserRouter>
+              <LocaleProvider setLocale={setLocale} />{" "}
+              {/* Add LocaleProvider here */}
+              <div>
+                <Routes>
+                  <Route path="/:lang/home" element={<HomePage />} />
+                  {/* <Route path="/about" element={<About />} /> */}
+                  <Route path="*" element={<div>404 Not Found</div>} />
+                </Routes>
+              </div>
+            </BrowserRouter>
+          </TooltipProvider>
+        </QueryClientProvider>
       </ThemeProvider>
     </IntlProvider>
   );

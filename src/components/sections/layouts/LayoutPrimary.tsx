@@ -18,13 +18,13 @@ const LayoutPrimary: React.FC<LayoutPrimaryProps> = ({
   return (
     <div
       className={cn(
-        "w-screen flex flex-col  max-w-screen dark:bg-[#040D12]  overflow-x-hidden"
+        "w-screen flex flex-col max-w-screen dark:bg-[#040D12]  overflow-x-hidden"
       )}
     >
       {navbar && <div className="w-full">{navbar}</div>}
-      <div className="flex">
+      <div className="flex pt-10 ">
         {sidebar ?? ""}
-        <div className="w-full min-h-screen overflow-x-hidden px-4  overflow-y-auto flex flex-col pb-16 max-w-[1440px]">
+        <div className="flex flex-col w-full min-h-screen px-4 pb-16 overflow-x-hidden overflow-y-auto ">
           {children}
         </div>
       </div>

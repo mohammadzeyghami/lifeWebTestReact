@@ -12,7 +12,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@/components/atoms/tooltip/tooltip";
 import { Link } from "react-router-dom";
 
 export function SidebarShadcn() {
