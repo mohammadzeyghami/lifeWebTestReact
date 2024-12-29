@@ -74,7 +74,7 @@ const TablePrimary: React.FC<TablePrimaryProps> = ({
           </TableBody>
         </Table>
       ) : (
-        <TableMobile data={data} /> // Use filtered products
+        <>{loading ? <p>Loading...</p> : <TableMobile data={data} />}</>
       )}
     </>
   );

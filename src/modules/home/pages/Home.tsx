@@ -128,17 +128,14 @@ const HomePage = () => {
               Error fetching products: {error.message}
             </div>
           )}
-          {isLoading ? (
-            <div>Loading...</div>
-          ) : (
-            <>
-              <TablePrimary
-                columns={columns}
-                data={filteredProducts} // Use filtered products
-                loading={isLoading}
-              />
-            </>
-          )}
+
+          <>
+            <TablePrimary
+              columns={columns}
+              data={filteredProducts} // Use filtered products
+              loading={isLoading}
+            />
+          </>
         </div>
       </div>
     </LayoutPrimary>
