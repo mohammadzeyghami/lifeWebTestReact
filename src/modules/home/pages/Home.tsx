@@ -8,7 +8,6 @@ import InputPrimary from "@/components/atoms/input/primary";
 import { DatePickerWithRange } from "@/components/molecules/datepicker/default"; // Ensure correct import
 import useDebounce from "@/components/utils/debounce";
 import TablePrimary from "@/components/molecules/table/primary";
-import TableMobile from "@/components/molecules/table/Mobile";
 
 type DateRange = {
   startDate?: Date;
